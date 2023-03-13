@@ -1,5 +1,20 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+// const shapes = require('./lib/shapes');
+
+// produces line of code that generates colored shape
+function generateShape(shape, shapeColor) {
+    if (shape === 'Triangle') {
+        const newTriangle = new Triangle(shapeColor);
+        return newTriangle.render();
+    } else if (shape === 'Circle') {
+        const newCircle = new Circle(shapeColor);
+        return newCircle.render();
+    } else if (shape === 'Square') {
+        const newSquare = new Square(shapeColor);
+        return newSquare.render();
+    }
+}
 
 // generate text within logo.svg file
 // TODO: currently using sample, switch these out with values based on user inputs
