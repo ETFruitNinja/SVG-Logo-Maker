@@ -1,17 +1,21 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-// const shapes = require('./lib/shapes');
+const { Triangle, Circle, Square } = require('./lib/shapes');
+const { kMaxLength } = require('buffer');
 
 // produces line of code that generates colored shape
 function generateShape(shape, shapeColor) {
     if (shape === 'Triangle') {
-        const newTriangle = new Triangle(shapeColor);
+        const newTriangle = new Triangle();
+        newTriangle.setColor(shapeColor);
         return newTriangle.render();
     } else if (shape === 'Circle') {
-        const newCircle = new Circle(shapeColor);
+        const newCircle = new Circle();
+        newCircle.setColor(shapeColor);
         return newCircle.render();
     } else if (shape === 'Square') {
-        const newSquare = new Square(shapeColor);
+        const newSquare = new Square();
+        newSquare.setColor(shapeColor);
         return newSquare.render();
     }
 }
@@ -25,9 +29,9 @@ xmlns="http://www.w3.org/2000/svg">
 
 <rect width="100%" height="100%" fill="white" />
 
-<circle cx="150" cy="100" r="80" fill="green" />
+${generateShape(shape, shapeColor)}
 
-<text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
+<text x="150" y="125" font-size="60" text-anchor="middle" fill="${textColor}">${text}</text>
 
 </svg>`;
 
@@ -59,7 +63,7 @@ inquirer
     .then((data) => {
         const svgConent = generateSvgText(data);
 
-        fs.writeFile('logo.svg', data, (err) => 
+        fs.writeFile('./lib/logo.svg', svgConent, (err) => 
             err ? console.log(err) : console.log('Generated logo.svg')
         );
     })
