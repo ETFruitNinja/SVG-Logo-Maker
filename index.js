@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const { Triangle, Circle, Square } = require('./lib/shapes');
-const { kMaxLength } = require('buffer');
 
 // produces line of code that generates colored shape
 function generateShape(shape, shapeColor) {
@@ -21,7 +20,6 @@ function generateShape(shape, shapeColor) {
 }
 
 // generate text within logo.svg file
-// TODO: currently using sample, switch these out with values based on user inputs
 const generateSvgText = ({text, textColor, shape, shapeColor}) => 
 `<svg version="1.1"
 width="300" height="200"
@@ -63,7 +61,8 @@ inquirer
     .then((data) => {
         const svgConent = generateSvgText(data);
 
-        fs.writeFile('./lib/logo.svg', svgConent, (err) => 
+        // creates file for logo.svg based on user input
+        fs.writeFile('./examples/logo.svg', svgConent, (err) => 
             err ? console.log(err) : console.log('Generated logo.svg')
         );
     })
